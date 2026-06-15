@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Observation {
+  id                   String   @id @default(uuid())
+
+  employeeName         String
+  employeeId           String
+
+  cabNumber            String
+  driverName           String
+
+  routeLocation        String
+
+  behaviourObservation String
+
+  riskLevel            RiskLevel
+
+  remarks              String
+
+  documentUrl          String?
+
+  status               Status @default(OPEN)
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  statusHistory        StatusHistory[]
+
+  @@map("observations")
+}
+
+model StatusHistory {
+  id            String   @id @default(uuid())
+
+  observationId String
+
+  oldStatus     Status?
+  newStatus     Status
+
+  changedAt     DateTime @default(now())
+
+  observation Observation @relation(fields: [observationId], references: [id])
+
+  @@map("status_history")
+}
+
+enum RiskLevel {
+  LOW
+  MODERATE
+  HIGH
+}
+
+enum Status {
+  OPEN
+  UNDER_REVIEW
+  CLOSED
+}

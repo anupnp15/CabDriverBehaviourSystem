@@ -1,0 +1,29 @@
+.success-page{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.success-box{
+    background:white;
+    padding:50px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.tick{
+    font-size:80px;
+    color:green;
+}
+
+.success-btn{
+    display:inline-block;
+    margin-top:20px;
+    text-decoration:none;
+    background:#3498ff;
+    color:white;
+    padding:12px 20px;
+    border-radius:5px;
+}
